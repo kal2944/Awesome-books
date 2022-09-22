@@ -1,4 +1,6 @@
+/* eslint-disable max-classes-per-file */
 const form = document.querySelector('form');
+
 class Book {
   constructor(title, author) {
     this.title = title;
