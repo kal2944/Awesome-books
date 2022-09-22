@@ -1,52 +1,95 @@
-let booksArr = [];
-const form = document.querySelector('.insertBookForm');
-const bTitle = document.querySelector('#b-title');
-const bAuthor = document.querySelector('#b-author');
+/* eslint-disable max-classes-per-file */
+const form = document.querySelector('form');
 
-function fetchBooks() {
-  const books = JSON.parse(localStorage.getItem('books'));
-  if (books !== null) {
-    booksArr = books;
+class Book {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
+  }
+}
+class Storage {
+  static BooksFromStorage() {
+    let books;
+    if (localStorage.getItem('books') === null) {
+      books = [];
+    } else {
+      books = JSON.parse(localStorage.getItem('books'));
+    }
+    return books;
+  }
+
+  static BooksToStorage(book) {
+    const books = Storage.BooksFromStorage();
+
+    books.push(book);
+
+    localStorage.setItem('books', JSON.stringify(books));
+  }
+
+  static removeFromStorage(author) {
+    const books = Storage.BooksFromStorage();
+
+    books.forEach((book, i) => {
+      if (book.author === author) {
+        books.splice(i, 1);
+      }
+    });
+    localStorage.setItem('books', JSON.stringify(books));
   }
 }
 
-function showBooks() {
-  const bookDiv = document.querySelector('.books');
-  let booksContent = '';
-  if (booksArr.length !== 0) {
-    booksArr.forEach((book) => {
-      booksContent += `<p>${book.title}</p> <p>${book.author}</p><button data-title=${book.title} class="deleteBook">Remove</button> <hr>`;
-    });
-    bookDiv.innerHTML = booksContent;
-    const deleteBook = document.querySelectorAll('.deleteBook');
-    deleteBook.forEach((element) => {
-      element.addEventListener('click', function deleteBook() {
-        const { title } = this.dataset;
-        const remove = booksArr.filter((b) => b.title !== title);
-        localStorage.setItem('books', JSON.stringify(remove));
-        fetchBooks();
-        showBooks();
-      });
-    });
-  } else {
-    bookDiv.innerHTML = '';
+class BooksToDom {
+  static displayBooksInDom() {
+    const books = Storage.BooksFromStorage();
+
+    books.forEach((book) => BooksToDom.BooksList(book));
+  }
+
+  static BooksList(book) {
+    const tbody = document.querySelector('#tbody');
+    const tableRow = document.createElement('tr');
+
+    tableRow.innerHTML = `
+    <td>${`"${book.title}"`}</td>
+    <td>by</td>
+    <td>${book.author}</td>
+    <td><a href="#" class='rm-button'>Remove</a></td>
+    `;
+    tbody.appendChild(tableRow);
+  }
+
+  static deleteBook(el) {
+    if (el.classList.contains('rm-button')) {
+      el.parentElement.parentElement.remove();
+    }
+  }
+
+  static clearField() {
+    document.querySelector('#b-title').value = '';
+    document.querySelector('#b-author').value = '';
   }
 }
 
-function insertBook(e) {
-  const book = {
-    title: bTitle.value,
-    author: bAuthor.value,
-  };
-  booksArr.push(book);
-  localStorage.setItem('books', JSON.stringify(booksArr));
+document.addEventListener('DOMContentLoaded', BooksToDom.displayBooksInDom);
+
+form.addEventListener('submit', (e) => {
   e.preventDefault();
-  bTitle.value = '';
-  bAuthor.value = '';
-  showBooks();
-}
 
-fetchBooks();
-showBooks();
+  const title = document.getElementById('b-title').value;
+  const author = document.getElementById('b-author').value;
 
-form.addEventListener('submit', insertBook);
+  const book = new Book(title, author);
+
+  BooksToDom.BooksList(book);
+
+  Storage.BooksToStorage(book);
+
+  BooksToDom.clearField();
+});
+
+document.querySelector('#tbody').addEventListener('click', (e) => {
+  BooksToDom.deleteBook(e.target);
+  Storage.removeFromStorage(
+    e.target.parentElement.previousElementSibling.textContent,
+  );
+});

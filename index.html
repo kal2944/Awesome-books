@@ -9,25 +9,20 @@
   </head>
   <body>
     <h1>Awesome Books</h1>
-    <div class="books"></div>
-    <form method="post" class="insertBookForm">
-      <input
-        type="text"
-        name="title"
-        id="b-title"
-        placeholder="Title"
-        required
-      />
-      <input
-        type="text"
-        name="author"
-        id="b-author"
-        placeholder="Author"
-        required
-      />
-      <button type="submit">Add</button>
-    </form>
+    <table>
+      <tbody class="tbody" id="tbody"></tbody>
+    </table>
+    <div class="hr-list"></div>
+ <h2>Add a new book</h2>
+    <div class="form">
+      <form action="#" method="POST">
+        <input type="text" placeholder="Title" id="b-title" required />
+        <br />
+        <input type="text" placeholder="Author" id="b-author" required />
+        <br />
+        <button type="submit">Add</button>
+      </form>
+    </div>
 
     <script src="src/index.js"></script>
   </body>
-</html>
