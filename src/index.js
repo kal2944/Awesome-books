@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 const form = document.querySelector('form');
-// const navbookList = document.querySelector('.nav-Booklist');
+const navbookList = document.querySelector('.nav-Booklist');
 const navAddBook = document.querySelector('.nav-addBook');
 const navContactus = document.querySelector('.nav-contactus');
 const addBook = document.querySelector('.add');
@@ -12,6 +12,11 @@ const empty = document.querySelector('.empty');
 document.querySelector('time').innerHTML = new Date().toLocaleString();
 
 // listing books link
+navbookList.addEventListener('click', () => {
+  list.classList.remove('hide');
+  addBook.classList.add('hide');
+  contact.classList.add('hide');
+});
 
 // adding books link
 navAddBook.addEventListener('click', () => {
@@ -131,7 +136,7 @@ document.querySelector('#tbody').addEventListener('click', (e) => {
   BooksToDom.deleteBook(e.target);
 
   Storage.removeFromStorage(
-    e.target.parentElement.previousElementSibling.textContent,
+    e.target.parentElement.previousElementSibling.textContent
   );
   Storage.checkEmptyList();
 });
