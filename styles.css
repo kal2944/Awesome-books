@@ -1,4 +1,3 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap'); */
 
 * {
   margin: 0;
@@ -6,18 +5,73 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
 a {
   text-decoration: none;
-  background-color: white;
-  color: black;
-  float: right;
-  margin: 5px 5px;
-  border: 1px solid rgb(19, 2, 2);
-  padding: 2px 8px;
+}
+
+li {
+  list-style-type: none;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 99%;
+  margin: 0 auto;
+  border: 4px solid #000;
+  padding: 0.3em;
+  margin-top: 10px;
+}
+
+.logo {
+  font-size: xx-large;
+  font-weight: 700;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: rgb(11, 11, 10);
+  margin-left: 8px;
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.nav-menu li {
+  margin: 0 5px;
+}
+
+.nav-link {
+  color: #000;
+  font-weight: 600;
+}
+
+.nav-link:active,
+.nav-link:focus,
+.nav-link:hover {
+  color: blue;
+}
+
+.time {
+  position: absolute;
+  top: 72px;
+  right: 12px;
+  font-weight: 600;
+}
+
+body {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1.2em;
+}
+
+.hide {
+  display: none;
 }
 
 h1 {
@@ -27,38 +81,45 @@ h1 {
   font-size: 2em;
 }
 
-h2 {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.rm-button {
+  text-decoration: none;
+  background-color: white;
+  color: black;
+  float: right;
+  margin: 5px 5px;
+  border: 1px solid rgb(212, 211, 211);
+  padding: 2px 8px;
+}
+
+.empty {
   text-align: center;
-  line-height: 2em;
-  font-size: 1.5em;
+  font-weight: 600;
 }
 
 table {
   margin: auto;
-  border: 2px solid rgb(0, 0, 0);
+  border: 3px solid rgb(0, 0, 0);
   border-collapse: collapse;
   width: 30%;
 }
 
 table td {
   font-size: larger;
-  font-weight: 700;
+  font-weight: 600;
+  text-align: left;
 }
 
 table td:first-child {
   padding-left: 8px;
 }
 
-table tr:nth-child(odd) {
-  background-color: rgb(212, 211, 211);
+table td:nth-child(2) {
+  padding: 0 20px;
+  font-style: italic;
 }
 
-.hr-list {
-  width: 22%;
-  height: 3px;
+table tr:nth-child(odd) {
   background-color: rgb(212, 211, 211);
-  margin: 20px auto;
 }
 
 .form {
@@ -74,7 +135,7 @@ input {
   padding: 0.5em;
   width: 100%;
   outline: none;
-  border: 3px solid black;
+  border: 2px solid rgb(112, 110, 110);
 }
 
 form button {
@@ -86,4 +147,26 @@ form button {
   outline: none;
   border: 2px solid rgb(112, 110, 110);
   box-shadow: 3px 3px rgb(112, 110, 110);
+}
+
+.contact-details {
+  text-align: center;
+}
+
+.contact-details p,
+.contact-details ul {
+  font-size: larger;
+  font-weight: 600;
+  line-height: 2em;
+}
+
+footer {
+  background-color: #fff;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 1em 0;
+  font-weight: 600;
 }
